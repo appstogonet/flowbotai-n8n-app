@@ -1,5 +1,5 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
-import { CONFIG } from '../../shared/config';
+import { FLOWBOT_API_BASE_URL } from '../../credentials/FlowbotApi.credentials';
 
 export class SendAgentResponseAction implements INodeType {
     description: INodeTypeDescription = {
@@ -48,14 +48,18 @@ export class SendAgentResponseAction implements INodeType {
             }
 
             const credentials = await this.getCredentials('flowbotApi');
+            const baseUrl = FLOWBOT_API_BASE_URL.endsWith('/')
+                ? FLOWBOT_API_BASE_URL
+                : FLOWBOT_API_BASE_URL + '/';
+
             const response = await this.helpers.request({
                 method: 'POST',
-                url: `${CONFIG.BASE_URL}/send_agent_response`,
+                url: `${baseUrl}send_agent_response`,
                 headers: {
                     'X-API-KEY': credentials?.apiKey,
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    'Flowbot-SourceIntegrationType': CONFIG.SOURCE_TYPE,
+                    'Flowbot-SourceIntegrationType': 'N8n',
                 },
                 body: {
                     message,

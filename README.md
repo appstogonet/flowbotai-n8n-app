@@ -42,12 +42,22 @@ This integration automates the creation and linking of a Flowbot tool with an ag
 
 #### Authentication
 
-- Users must enter credentials, including an API key, in the node’s credentials section.
-- The API key is required to authorize communication with the Flowbot backend.
-- Example header:
-  ```
-  X-API-KEY: <your-api-key>
-  ```
+Users must configure the Flowbot API credentials in n8n with the following required fields:
+- **API Base URL**: The base URL of your Flowbot API instance (e.g., `https://api.flowbot.com` or your custom ngrok/domain URL)
+- **API Key**: Your Flowbot API key for authentication
+
+To set up credentials:
+1. In n8n, go to **Credentials** and create a new **Flowbot** credential
+2. Enter your **API Base URL** (without trailing slash, it will be added automatically)
+3. Enter your **API Key**
+4. Test the connection to ensure it works
+
+The credentials are used by all Flowbot nodes to:
+- Authenticate with your Flowbot backend
+- Make requests to the correct API endpoint
+- Verify webhook subscriptions
+
+**Note:** This package does not use environment variables or config files. All configuration is managed through n8n credentials.
 
 #### Under the Hood
 
@@ -108,12 +118,32 @@ Only requests with valid headers and payload structure are processed by the n8n 
 ## Requirements
 
 To use these nodes you need:
-1. **A Flowbot account
-2. **API Key** generated in Flowbot.  
-   The node will send this key in headers (for example: `X-API-KEY`) with every request.  
-3. **Self-hosted n8n** or n8n instance that allows installing community nodes from npm.
+1. **A Flowbot account**
+2. **API Base URL** - The URL where your Flowbot API is hosted (e.g., `https://api.flowbot.com` or your ngrok URL)
+3. **API Key** - Generated in your Flowbot account settings  
+4. **Self-hosted n8n** or n8n cloud instance that allows installing community nodes from npm
 
-Node.js 18+ / 20+ and a recent n8n version are typically required for community nodes.
+Node.js 18+ and n8n v1.0.0+ are required for these community nodes.
+
+---
+
+## Configuration
+
+### Setting up Flowbot Credentials
+
+1. In your n8n instance, go to **Credentials** in the left sidebar
+2. Click **Add Credential** and search for **Flowbot**
+3. Fill in the required fields:
+   - **API Base URL**: Your Flowbot API endpoint (e.g., `https://api.flowbot.com` or `https://your-domain.ngrok-free.app`)
+   - **API Key**: Your Flowbot API key
+4. Click **Save** and test the connection
+
+All Flowbot nodes in your workflows will use these credentials automatically.
+
+**Important Notes:**
+- Do not include a trailing slash in the API Base URL - it will be added automatically
+- The API Base URL should be a valid HTTPS endpoint
+- No environment variables or `.env` files are needed - all configuration is managed through n8n credentials
 
 ---
 
