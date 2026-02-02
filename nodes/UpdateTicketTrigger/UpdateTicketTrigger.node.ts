@@ -10,18 +10,18 @@ import { FlowbotClient } from '../../shared/FlowbotClient';
 
 export class UpdateTicketTrigger implements INodeType {
   description: INodeTypeDescription = {
-    displayName: 'Flowbot Update Ticket Trigger',
+    displayName: 'FlowbotAI Update Ticket Trigger',
     name: 'updateTicketTrigger',
     group: ['trigger'],
     version: 1,
-    description: 'Triggers when someone updates a ticket in Flowbot.',
+    description: 'Triggers when someone updates a ticket in FlowbotAI.',
     defaults: {
       name: 'Update Ticket Trigger',
     },
     codex: {
       categories: ['Productivity'],
-      subcategories: { Productivity: ['Flowbot'] },
-      alias: ['Flowbot'],
+      subcategories: { Productivity: ['FlowbotAI'] },
+      alias: ['FlowbotAI'],
     },
     inputs: [],
     outputs: ['main'],
@@ -49,7 +49,7 @@ export class UpdateTicketTrigger implements INodeType {
           loadOptionsMethod: 'getAgents',
         },
         default: [],
-        description: 'Select one or more Flowbot agents to filter events.',
+        description: 'Select one or more FlowbotAI agents to filter events.',
       },
       {
         displayName: 'Tool Name',
@@ -57,7 +57,7 @@ export class UpdateTicketTrigger implements INodeType {
         type: 'string',
         required: true,
         default: 'update_ticket',
-        description: 'Custom name for this tool. Used for identification in Flowbot backend.',
+        description: 'Custom name for this tool. Used for identification in FlowbotAI backend.',
       },
     ],
   };

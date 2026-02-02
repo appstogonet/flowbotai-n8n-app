@@ -10,18 +10,18 @@ import { FlowbotClient } from '../../shared/FlowbotClient';
 
 export class CreateTicketTrigger implements INodeType {
   description: INodeTypeDescription = {
-    displayName: 'Flowbot Create Ticket Trigger',
+    displayName: 'FlowbotAI Create Ticket Trigger',
     name: 'createTicketTrigger',
     group: ['trigger'],
     version: 1,
-    description: 'Triggers from Flowbot.',
+    description: 'Triggers from FlowbotAI.',
     defaults: {
-      name: 'Flowbot Create Ticket',
+      name: 'FlowbotAI Create Ticket',
     },
     codex: {
       categories: ['Productivity'],
-      subcategories: { Productivity: ['Flowbot'] },
-      alias: ['Flowbot'],
+      subcategories: { Productivity: ['FlowbotAI'] },
+      alias: ['FlowbotAI'],
     },
     inputs: [],
     outputs: ['main'],
@@ -49,7 +49,7 @@ export class CreateTicketTrigger implements INodeType {
           loadOptionsMethod: 'getAgents',
         },
         default: [],
-        description: 'Select one or more Flowbot agents to filter events.',
+        description: 'Select one or more FlowbotAI agents to filter events.',
       },
       {
         displayName: 'Tool Name',
@@ -57,7 +57,7 @@ export class CreateTicketTrigger implements INodeType {
         type: 'string',
         required: true,
         default: 'create_tool',
-        description: 'Custom name for this tool. Used for identification in Flowbot backend.',
+        description: 'Custom name for this tool. Used for identification in FlowbotAI backend.',
       }
     ],
   };
