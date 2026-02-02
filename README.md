@@ -20,11 +20,11 @@ With these nodes you can:
 ## Features
 
 ### Triggers
+- **Flowbot Ticket Updated Trigger**  
   Fires in n8n when a ticket is updated in FlowbotAI (status change, new message, assignment, etc.).
+
 - **FlowbotAI New Ticket Trigger**  
- **FlowbotAI Ticket Updated Trigger**  
   Fires when a new ticket is created in FlowbotAI.
- **FlowbotAI New Ticket Trigger**  
 
 ---
 
@@ -42,22 +42,17 @@ This integration automates the creation and linking of a FlowbotAI tool with an 
 
 #### Authentication
 
-Users must configure the FlowbotAI API credentials in n8n with the following required fields:
-- **API Base URL**: The base URL of your FlowbotAI API instance (e.g., `https://api.flowbotai.com` or your custom ngrok/domain URL)
+Users must configure the FlowbotAI API credentials in n8n with the following required field:
 - **API Key**: Your FlowbotAI API key for authentication
 
 To set up credentials:
 1. In n8n, go to **Credentials** and create a new **FlowbotAI** credential
-2. Enter your **API Base URL** (without trailing slash, it will be added automatically)
-3. Enter your **API Key**
-4. Test the connection to ensure it works
+2. Enter your **API Key**
+3. Test the connection to ensure it works
 
 The credentials are used by all FlowbotAI nodes to:
 - Authenticate with your FlowbotAI backend
-- Make requests to the correct API endpoint
 - Verify webhook subscriptions
-
-**Note:** This package does not use environment variables or config files. All configuration is managed through n8n credentials.
 
 #### Under the Hood
 
@@ -119,9 +114,8 @@ Only requests with valid headers and payload structure are processed by the n8n 
 
 To use these nodes you need:
 1. **A FlowbotAI account**
-2. **API Base URL** - The URL where your FlowbotAI API is hosted (e.g., `https://api.FlowbotAI.com` or your ngrok URL)
-3. **API Key** - Generated in your FlowbotAI account settings  
-4. **Self-hosted n8n** or n8n cloud instance that allows installing community nodes from npm
+2. **API Key** - Generated in your FlowbotAI account settings  
+3. **Self-hosted n8n** or n8n cloud instance that allows installing community nodes from npm
 
 Node.js 18+ and n8n v1.0.0+ are required for these community nodes.
 
@@ -133,16 +127,13 @@ Node.js 18+ and n8n v1.0.0+ are required for these community nodes.
 
 1. In your n8n instance, go to **Credentials** in the left sidebar
 2. Click **Add Credential** and search for **FlowbotAI**
-3. Fill in the required fields:
-   - **API Base URL**: Your FlowbotAI API endpoint (e.g., `https://api.flowbotai.com` or `https://your-domain.ngrok-free.app`)
-   - **API Key**: Your Flowbot API key
+3. Fill in the required field:
+  - **API Key**: Your FlowbotAI API key
 4. Click **Save** and test the connection
 
 All FlowbotAI nodes in your workflows will use these credentials automatically.
 
 **Important Notes:**
-- Do not include a trailing slash in the API Base URL - it will be added automatically
-- The API Base URL should be a valid HTTPS endpoint
 - No environment variables or `.env` files are needed - all configuration is managed through n8n credentials
 
 ---
