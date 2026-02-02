@@ -4,7 +4,9 @@ import type {
     ICredentialType,
     INodeProperties
 } from 'n8n-workflow';
-import { CONFIG } from '../shared/config';
+
+// Central configuration - modify this URL as needed
+export const FLOWBOT_API_BASE_URL = 'https://flowbot.api.appstogo.net';
 
 export class FlowbotApi implements ICredentialType {
     name = 'flowbotApi';
@@ -25,13 +27,13 @@ export class FlowbotApi implements ICredentialType {
         properties: {
             headers: {
                 'X-Api-Key': '={{$credentials.apiKey}}',
-                'Flowbot-SourceIntegrationType': CONFIG.SOURCE_TYPE,
+                'Flowbot-SourceIntegrationType': 'N8n',
             },
         },
     };
     test: ICredentialTestRequest = {
         request: {
-            baseURL: CONFIG.BASE_URL,
+            baseURL: FLOWBOT_API_BASE_URL,
             url: '/get-agents',
         },
     };

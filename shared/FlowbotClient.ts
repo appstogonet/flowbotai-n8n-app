@@ -3,20 +3,20 @@ import {
   ILoadOptionsFunctions,
   IHttpRequestOptions,
 } from 'n8n-workflow';
-import { CONFIG } from './config';
+import { FLOWBOT_API_BASE_URL } from '../credentials/FlowbotApi.credentials';
 
 type RequestCapable = Pick<IExecuteFunctions, 'helpers'> | Pick<ILoadOptionsFunctions, 'helpers'>;
 
 export class FlowbotClient {
   private readonly baseUrl: string;
-  private readonly sourceType: string;
+  private readonly sourceType: string = 'N8n';
 
   constructor(
     private readonly ctx: RequestCapable,
-    private readonly credentials: { apiKey: string },
+    private readonly credentials: { apiKey: string; baseUrl?: string },
   ) {
-    this.baseUrl = CONFIG.BASE_URL.endsWith('/') ? CONFIG.BASE_URL : CONFIG.BASE_URL + '/';
-    this.sourceType = CONFIG.SOURCE_TYPE;
+    const url = credentials.baseUrl || FLOWBOT_API_BASE_URL;
+    this.baseUrl = url.endsWith('/') ? url : url + '/';
   }
 
   private getHeaders(): Record<string, string> {
@@ -67,7 +67,7 @@ export class FlowbotClient {
     return new Error('Unknown error');
   }
 
-  static async getAgents(helpers: ILoadOptionsFunctions, credentials: { apiKey: string }) {
+  static async getAgents(helpers: ILoadOptionsFunctions, credentials: { apiKey: string; baseUrl?: string }) {
     const client = new FlowbotClient(helpers, credentials);
     const agents = await client.request<{ id: string; name: string }[]>({
       url: '/get-agents',

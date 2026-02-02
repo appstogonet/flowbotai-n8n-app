@@ -1,14 +1,14 @@
 import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
-import { CONFIG } from '../shared/config';
+import { FLOWBOT_API_BASE_URL } from '../credentials/FlowbotApi.credentials';
 
 export class CallTransferAction implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Call Transfer',
+        displayName: 'FlowbotAI Call Transfer',
         name: 'callTransfer',
         group: ['transform'],
         version: 1,
         description: 'Transfer the call to another destination.',
-        defaults: { name: 'Call Transfer' },
+        defaults: { name: 'FlowbotAI Call Transfer' },
         inputs: ['main'],
         outputs: ['main'],
         credentials: [{ name: 'flowbotApi', required: true }],
@@ -40,13 +40,17 @@ export class CallTransferAction implements INodeType {
             const callId = this.getNodeParameter('call_id', i) as string;
             const destination = this.getNodeParameter('destination', i) as string;
             const credentials = await this.getCredentials('flowbotApi');
+            const baseUrl = FLOWBOT_API_BASE_URL.endsWith('/')
+                ? FLOWBOT_API_BASE_URL
+                : FLOWBOT_API_BASE_URL + '/';
+
             const response = await this.helpers.request({
                 method: 'POST',
-                url: `${CONFIG.BASE_URL}/actions/call_transfer`,
+                url: `${baseUrl}actions/call_transfer`,
                 headers: {
                     'X-API-KEY': credentials?.apiKey,
                     Accept: 'application/json',
-                    'Flowbot-SourceIntegrationType': CONFIG.SOURCE_TYPE,
+                    'Flowbot-SourceIntegrationType': 'N8n',
                 },
                 body: {
                     call_id: callId,
