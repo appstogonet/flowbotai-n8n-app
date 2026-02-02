@@ -3,12 +3,12 @@ import { FLOWBOT_API_BASE_URL } from '../credentials/FlowbotApi.credentials';
 
 export class CallTransferAction implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Call Transfer',
+        displayName: 'FlowbotAI Call Transfer',
         name: 'callTransfer',
         group: ['transform'],
         version: 1,
         description: 'Transfer the call to another destination.',
-        defaults: { name: 'Call Transfer' },
+        defaults: { name: 'FlowbotAI Call Transfer' },
         inputs: ['main'],
         outputs: ['main'],
         credentials: [{ name: 'flowbotApi', required: true }],

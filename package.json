@@ -1,11 +1,11 @@
 {
-  "name": "n8n-nodes-flowbot",
+  "name": "n8n-nodes-flowbotai",
   "version": "3.0.13",
-  "description": "Flowbot custom nodes for n8n",
+  "description": "FlowbotAI custom nodes for n8n",
   "keywords": [
-    "flowbot",
+    "flowbotai",
     "n8n-community-node-package",
-    "n8n-nodes-flowbot",
+    "n8n-nodes-flowbotai",
     "n8n-nodes",
     "n8n",
     "n8n.io",
@@ -21,16 +21,16 @@
     "test": "jest",
     "prepare": "npm run build"
   },
-  "author": "Flowbot Developer <info@appstogo.net> (https://appstogo.net/flowbot-connector)",
+  "author": "FlowbotAI Developer <info@appstogo.net> (https://appstogo.net/flowbot-connector)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/appstogonet/flowbot-n8n-app"
+    "url": "https://github.com/appstogonet/flowbotai-n8n-app"
   },
   "bugs": {
-    "url": "https://github.com/appstogonet/flowbot-n8n-app/issues"
+    "url": "https://github.com/appstogonet/flowbotai-n8n-app/issues"
   },
-  "homepage": "https://github.com/appstogonet/flowbot-n8n-app#readme",
+  "homepage": "https://github.com/appstogonet/flowbotai-n8n-app#readme",
   "publishConfig": {
     "access": "public"
   },

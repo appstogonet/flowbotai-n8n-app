@@ -3,12 +3,12 @@ import { FLOWBOT_API_BASE_URL } from '../../credentials/FlowbotApi.credentials';
 
 export class SendAgentResponseAction implements INodeType {
     description: INodeTypeDescription = {
-        displayName: 'Send Agent Response',
+        displayName: 'FlowbotAI Send Agent Response',
         name: 'sendAgentResponse',
         group: ['transform'],
         version: 1,
         description: 'Send a message response back to the agent for a specific call.',
-        defaults: { name: 'Send Agent Response' },
+        defaults: { name: 'FlowbotAI Send Agent Response' },
         inputs: ['main'],
         outputs: ['main'],
         credentials: [{ name: 'flowbotApi', required: true }],
