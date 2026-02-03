@@ -3,7 +3,7 @@ import { FlowbotClient } from './FlowbotClient';
 describe('FlowbotClient', () => {
   const helpers: any = {
     helpers: {
-      request: jest.fn(async (opts) => {
+      httpRequest: jest.fn(async (opts) => {
         if (opts.url.includes('fail')) throw { statusCode: 500, message: 'Server error' };
         return { id: '123', name: 'Agent' };
       }),
