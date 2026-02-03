@@ -52,7 +52,7 @@ export class SendAgentResponseAction implements INodeType {
                 ? FLOWBOT_API_BASE_URL
                 : FLOWBOT_API_BASE_URL + '/';
 
-            const response = await this.helpers.request({
+            const response = await this.helpers.httpRequest({
                 method: 'POST',
                 url: `${baseUrl}send_agent_response`,
                 headers: {
