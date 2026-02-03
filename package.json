@@ -74,6 +74,5 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "n8n-workflow": "^1.17.0"
   }
 }
