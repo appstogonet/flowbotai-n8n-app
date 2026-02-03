@@ -44,7 +44,7 @@ export class CallTransferAction implements INodeType {
                 ? FLOWBOT_API_BASE_URL
                 : FLOWBOT_API_BASE_URL + '/';
 
-            const response = await this.helpers.request({
+            const response = await this.helpers.httpRequest({
                 method: 'POST',
                 url: `${baseUrl}actions/call_transfer`,
                 headers: {

@@ -41,24 +41,11 @@ export class FlowbotClient {
       json: true,
     };
 
-    let attempt = 0;
-    let lastError: any;
-
-    while (attempt < 3) {
-      try {
-        return await this.ctx.helpers.request!(opts);
-      } catch (error: any) {
-        lastError = error;
-        const status = error?.statusCode ?? error?.response?.statusCode;
-        if ([429, 500, 502, 503, 504].includes(status)) {
-          await new Promise((res) => setTimeout(res, 2 ** attempt * 500));
-          attempt++;
-          continue;
-        }
-        throw this.normalizeError(error);
-      }
+    try {
+      return await this.ctx.helpers.httpRequest!(opts);
+    } catch (error: any) {
+      throw this.normalizeError(error);
     }
-    throw this.normalizeError(lastError);
   }
 
   private normalizeError(error: any): Error {

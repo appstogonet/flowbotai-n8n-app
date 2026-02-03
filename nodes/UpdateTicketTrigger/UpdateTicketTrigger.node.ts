@@ -77,8 +77,6 @@ export class UpdateTicketTrigger implements INodeType {
     const headers = this.getHeaderData();
     const body = this.getBodyData();
 
-    console.log('[Flowbot Webhook] Received payload:', JSON.stringify(body, null, 2));
-
     const headerValue =
       headers['integration-header'] ||
       headers['Integration-Header'] ||
@@ -98,7 +96,6 @@ export class UpdateTicketTrigger implements INodeType {
     }
 
     const staticData = this.getWorkflowStaticData('node');
-    console.log('Static Data:', staticData);
 
     // Verify the header with Flowbot API
     const credentials = await this.getCredentials('flowbotApi');
@@ -151,7 +148,6 @@ export class UpdateTicketTrigger implements INodeType {
               ...(triggerKey ? { triggerKey } : {}),
               webhookUrl: webhookUrl || '',
             };
-            console.log('[Flowbot Manual Test] Sending request to /sample-perform/n8n with headers:', headers);
             await client.request({
               url: '/sample-perform/n8n',
               method: 'POST',
@@ -180,22 +176,15 @@ export class UpdateTicketTrigger implements INodeType {
             agentId: agentIds,
             triggerKey,
           };
-          console.log('[Flowbot Subscribe] Sending subscription request:', JSON.stringify(subscribeBody, null, 2));
           const response = await client.request({
             url: '/subscribe',
             method: 'POST',
             body: subscribeBody,
           });
 
-          console.log('[Flowbot Subscribe] Received response:', JSON.stringify(response, null, 2));
-
           const webhookId = response.id || response.subscriptionId;
-          console.log('[Flowbot Subscribe] Extracted webhookId:', webhookId);
           if (webhookId) {
             staticData.webhookId = webhookId;
-            console.log('[Flowbot Subscribe] Stored webhookId in staticData:', staticData.webhookId);
-          } else {
-            console.log('[Flowbot Subscribe] WARNING: No webhookId found in response!');
           }
           return true;
         } catch (error) {
@@ -207,12 +196,8 @@ export class UpdateTicketTrigger implements INodeType {
       },
       async delete(this: IHookFunctions): Promise<boolean> {
         const staticData = (this as unknown as IWebhookFunctions).getWorkflowStaticData('node');
-        console.log('[Flowbot Delete] Full staticData:', JSON.stringify(staticData, null, 2));
         const webhookId = staticData.webhookId;
-        const workflowId = this.getWorkflow().id;
-        console.log('[Flowbot Delete] User deactivating/deleting workflow. WorkflowId:', workflowId, 'WebhookId:', webhookId);
         if (!webhookId) {
-          console.log('[Flowbot Delete] No webhookId found. Subscription may not have been created or already deleted.');
           return true;
         }
         const credentials = await this.getCredentials('flowbotApi');
@@ -220,17 +205,13 @@ export class UpdateTicketTrigger implements INodeType {
           apiKey: credentials.apiKey as string,
         });
         try {
-          console.log('[Flowbot Unsubscribe] Sending unsubscribe request for webhook ID:', webhookId);
           await client.request({
             url: '/unsubscribe',
             method: 'POST',
             body: { id: webhookId },
           });
         } catch (error) {
-          const errorMsg = (error && typeof error === 'object' && 'message' in error)
-            ? (error as any).message
-            : String(error);
-          console.error(`[UpdateTicketTrigger] Unsubscribe failed: ${errorMsg}`);
+          // Silently handle unsubscribe errors
         }
         delete staticData.webhookId;
         return true;

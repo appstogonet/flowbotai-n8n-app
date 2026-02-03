@@ -35,7 +35,7 @@ export class StartTypingSoundAction implements INodeType {
         ? FLOWBOT_API_BASE_URL
         : FLOWBOT_API_BASE_URL + '/';
 
-      const response = await this.helpers.request({
+      const response = await this.helpers.httpRequest({
         method: 'POST',
         url: `${baseUrl}actions/start_typing_sound`,
         headers: {
