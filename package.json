@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-flowbotai",
-  "version": "3.0.15",
+  "version": "3.0.17",
   "description": "FlowbotAI custom nodes for n8n",
   "keywords": [
     "flowbotai",
