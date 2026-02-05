@@ -10,7 +10,7 @@ export const FLOWBOT_API_BASE_URL = 'https://flowbot.api.appstogo.net';
 
 export class FlowbotApi implements ICredentialType {
     name = 'flowbotApi';
-    displayName = 'Flowbot';
+    displayName = 'FlowbotAI';
     documentationUrl = '';
     properties: INodeProperties[] = [
         {
