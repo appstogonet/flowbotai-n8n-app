@@ -58,10 +58,7 @@
     "nodes": [
       "dist/nodes/CreateTicketTrigger/CreateTicketTrigger.node.js",
       "dist/nodes/UpdateTicketTrigger/UpdateTicketTrigger.node.js",
-      "dist/nodes/SendAgentResponseAction/SendAgentResponseAction.node.js",
-      "dist/CallTransferAction/CallTransferAction.node.js",
-      "dist/nodes/StartTypingSoundAction/StartTypingSoundAction.node.js",
-      "dist/nodes/StopTypingSoundAction/StopTypingSoundAction.node.js"
+      "dist/nodes/SendAgentResponseAction/SendAgentResponseAction.node.js"
     ]
   },
   "devDependencies": {
