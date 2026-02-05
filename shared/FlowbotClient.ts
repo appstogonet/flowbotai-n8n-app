@@ -2,10 +2,12 @@ import {
   IExecuteFunctions,
   ILoadOptionsFunctions,
   IHttpRequestOptions,
+  NodeApiError,
+  INode,
 } from 'n8n-workflow';
 import { FLOWBOT_API_BASE_URL } from '../credentials/FlowbotApi.credentials';
 
-type RequestCapable = Pick<IExecuteFunctions, 'helpers'> | Pick<ILoadOptionsFunctions, 'helpers'>;
+type RequestCapable = IExecuteFunctions | ILoadOptionsFunctions | any;
 
 export class FlowbotClient {
   private readonly baseUrl: string;
@@ -48,10 +50,16 @@ export class FlowbotClient {
     }
   }
 
-  private normalizeError(error: any): Error {
-    if (error?.error?.message) return new Error(error.error.message);
-    if (error?.message) return new Error(error.message);
-    return new Error('Unknown error');
+  private normalizeError(error: any): NodeApiError {
+    const message = error?.error?.message || error?.message || 'Unknown error';
+    const node: INode = this.ctx.getNode?.() || { 
+      name: 'FlowbotClient', 
+      type: 'n8n-nodes-flowbotai.flowbotClient', 
+      typeVersion: 1,
+      position: [0, 0],
+      parameters: {},
+    };
+    return new NodeApiError(node, error, { message });
   }
 
   static async getAgents(helpers: ILoadOptionsFunctions, credentials: { apiKey: string; baseUrl?: string }) {

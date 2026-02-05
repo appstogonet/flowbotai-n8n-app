@@ -5,6 +5,7 @@ import {
   IHookFunctions,
   IWebhookFunctions,
   IWebhookResponseData,
+  NodeOperationError,
 } from 'n8n-workflow';
 import { FlowbotClient } from '../../shared/FlowbotClient';
 
@@ -86,7 +87,7 @@ export class UpdateTicketTrigger implements INodeType {
       headers['http-INTEGRATION-HEADER'];
 
     if (!headerValue) {
-      throw new Error('Missing authentication header');
+      throw new NodeOperationError(this.getNode(), 'Missing authentication header');
     }
 
     if (headerValue === 'TEST_MODE') {
@@ -117,7 +118,8 @@ export class UpdateTicketTrigger implements INodeType {
       const errorMsg = (error && typeof error === 'object' && 'message' in error)
         ? (error as any).message
         : String(error);
-      throw new Error(
+      throw new NodeOperationError(
+        this.getNode(),
         `Invalid authentication header. ${errorMsg || 'Authentication failed'}.`,
       );
     }
@@ -191,7 +193,7 @@ export class UpdateTicketTrigger implements INodeType {
           const errorMsg = (error && typeof error === 'object' && 'message' in error)
             ? (error as any).message
             : String(error);
-          throw new Error(`Subscription failed: ${errorMsg}`);
+          throw new NodeOperationError(this.getNode(), `Subscription failed: ${errorMsg}`);
         }
       },
       async delete(this: IHookFunctions): Promise<boolean> {
@@ -210,7 +212,7 @@ export class UpdateTicketTrigger implements INodeType {
             method: 'POST',
             body: { id: webhookId },
           });
-        } catch (error) {
+        } catch {
           // Silently handle unsubscribe errors
         }
         delete staticData.webhookId;

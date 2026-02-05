@@ -1,4 +1,4 @@
-import { INodeType, INodeTypeDescription, IExecuteFunctions } from 'n8n-workflow';
+import { INodeType, INodeTypeDescription, IExecuteFunctions, NodeOperationError } from 'n8n-workflow';
 import { FLOWBOT_API_BASE_URL } from '../../credentials/FlowbotApi.credentials';
 
 export class SendAgentResponseAction implements INodeType {
@@ -44,7 +44,7 @@ export class SendAgentResponseAction implements INodeType {
             const message = this.getNodeParameter('message', i) as string;
 
             if (!callId) {
-                throw new Error('Missing call_id. Please map the Call ID field from your trigger.');
+                throw new NodeOperationError(this.getNode(), 'Missing call_id. Please map the Call ID field from your trigger.');
             }
 
             const credentials = await this.getCredentials('flowbotApi');
@@ -75,6 +75,7 @@ export class SendAgentResponseAction implements INodeType {
                     call_id: callId,
                     response,
                 },
+                pairedItem: i,
             });
         }
         return this.prepareOutputData(returnData);

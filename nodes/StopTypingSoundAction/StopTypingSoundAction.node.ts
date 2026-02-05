@@ -46,7 +46,7 @@ export class StopTypingSoundAction implements INodeType {
         body: { call_id: callId },
         json: true,
       });
-      returnData.push({ json: { success: true, call_id: callId, response } });
+      returnData.push({ json: { success: true, call_id: callId, response }, pairedItem: i });
     }
     return [returnData];
   }

@@ -59,7 +59,7 @@ export class CallTransferAction implements INodeType {
                 json: true,
             });
 
-            returnData.push({ json: { success: true, call_id: callId, destination, response } });
+            returnData.push({ json: { success: true, call_id: callId, destination, response }, pairedItem: i });
         }
         return this.prepareOutputData(returnData);
     }
