@@ -28,7 +28,6 @@ All trigger nodes follow this pattern (see [CreateTicketTrigger.node.ts](nodes/C
 
 ### Entry Point & Exports
 - [index.ts](index.ts) exports all nodes and credentials for n8n to discover
-- Hidden nodes (commented out) are still in the codebase but not exported: StartTypingSoundAction, StopTypingSoundAction, CallTransferAction
 
 ## Development Workflow
 
