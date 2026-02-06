@@ -13,6 +13,7 @@ export class CreateTicketTrigger implements INodeType {
   description: INodeTypeDescription = {
     displayName: 'FlowbotAI Create Ticket Trigger',
     name: 'createTicketTrigger',
+    icon: 'file:../../../icons/flowbotai.svg',
     group: ['trigger'],
     version: 1,
     description: 'Triggers from FlowbotAI.',
