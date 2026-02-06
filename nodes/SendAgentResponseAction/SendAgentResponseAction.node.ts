@@ -5,6 +5,7 @@ export class SendAgentResponseAction implements INodeType {
     description: INodeTypeDescription = {
         displayName: 'FlowbotAI Send Agent Response',
         name: 'sendAgentResponse',
+        icon: 'file:../../../icons/flowbotai.svg',
         group: ['transform'],
         version: 1,
         description: 'Send a message response back to the agent for a specific call.',
